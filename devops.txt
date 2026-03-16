@@ -77,6 +77,49 @@ git log
 git push origin branch-a
 
 
+lab 3
+
+sudo apt update
+sudo apt install openjdk-21-jdk -y
+sudo rm jenkins.war
+sudo rm -rf ~/.jenkins
+wget https://get.jenkins.io/war-stable/latest/jenkins.war
+ls
+java -jar jenkins.war --httpPort=8090
+open(http://localhost:8090 in browser)
+
+
+script.sh
+#!/bin/bash
+echo "hello from Github project"
+echo "CI/CD pipeline executed sucessfully"
+
+
+Jenkinsfile
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git url: 'https://github.com/chinpatel17/lab3.git',
+                    branch: 'main'
+            }
+        }
+
+        stage('Run Script') {
+            steps {
+                sh 'chmod +x script.sh'
+                sh './script.sh'
+            }
+        }
+
+    }
+}
+
+
+
 
 
 
